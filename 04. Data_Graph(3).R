@@ -28,6 +28,9 @@ boxplot (Age ~ Grade, X2023_STB_survey, ylim=c(18,28), ylab="AGE", xlab="GRADE" 
 # 이로도 똑같은 결과 나온다.
 boxplot(X2023_STB_survey$Age~X2023_STB_survey$Grade)
 
+#기술통계
+tapply(X2023_STB_survey$Age, X2023_STB_survey$Grade, summary)
+
 # 10. X2023_STB_survey의 Grade를 X값으로 Age를 Y값으로 하는 산점도를 만들어 보세요.
 plot(x=X2023_STB_survey$Grade, y=X2023_STB_survey$Age, xlab="Grade", ylab="Age", main="Grade and Age", pch=23, col="purple",bg="yellow", cex=1.0)
 
