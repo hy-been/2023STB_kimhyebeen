@@ -19,8 +19,8 @@ searchUrl <- "https://openapi.naver.com/v1/search/news.xml"
 Client_ID <- "0E336M3ofnArbJKDFlmO"
 Client_Secret <- "k0Si2V6FJZ"
 
-#뉴스 URL 작성(UTF-8로 암호화, API 요청할 URL 정의, 검색결과는 20로 요청)
-query <- URLencode(iconv("tving", to= "UTF-8"))
+#뉴스 URL 작성(UTF-8로 암호화, API 요청할 URL 정의, 검색결과는 100로 요청)
+query <- URLencode(iconv("티빙", to= "UTF-8"))
 url <- paste(searchUrl, "?query=", query, "&display=100&start=1&sort=sim", sep="")
 
 #문서 다운로드_URI 다운로드하기
