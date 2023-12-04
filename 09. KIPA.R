@@ -6,19 +6,19 @@ library(ggplot2)
 library(foreign)
 
 #.데이터 불러오기
-mental <- read.spss("KIPA_DATA_2022.SAV")
+mental <- read.spss("KIPA_DATA_2019.SAV")
 class(mental)#.객체유형 확인: list
 mental <- as.data.frame(mental)#.데이터프레임으로 변환
 class(mental)#.객체유형 확인: data.frame
 
 #.변수 추출 후 이름 변경
 mental <-mental %>%
-  select(q32_2,q1_4,q32_1,q34_1,q55,d17,d1,d2,ara)%>%
+  select(q32_2,q1_4,q32_1,q34_1,q52,d17,d1,d2,ara)%>%
   rename(suicide=q32_2,
          satisfaction=q1_4,
          loneliness=q32_1,
          family_belief=q34_1,
-         wealth=q55,
+         wealth=q52,
          health=d17,
          sex=d1,
          age=d2,
@@ -63,6 +63,7 @@ table(mental$age)
 table(mental$area)
 
 mental$age<-ifelse(mental$age=="19~29세","20대",mental$age)
+mental$age<-ifelse(mental$age=="60~69세","60대",mental$age)
 table(mental$age)
 
 #.결측치와 이상치 확인
@@ -134,12 +135,12 @@ vif(RA)
 
 #.가족신뢰도,경제안정도, 건강상태가 자살충동에 미치는 영향
 # 회귀분석 모델 생성
-RA <- lm(data = mental, suicide ~ family_belief + wealth + health)
-summary(RA)
+RA_suicide <- lm(data = mental, suicide ~ family_belief + wealth + health)
+summary(RA_suicide)
 options(ztable.type="viewer")
-ztable(RA)
+ztable(RA_suicide)
 # 다중공선성 확인
-vif(RA)
+vif(RA_suicide)
 
 
 #.독립표본t검정:성별 삶의 만족도 차이
